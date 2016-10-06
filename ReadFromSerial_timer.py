@@ -22,6 +22,7 @@ import sys
 s=0
 s1=0
 c=0
+d=0
 count=0
 #comando che riavvia la raspberry
 command= "/usr/bin/sudo /sbin/shutdown -r now"
@@ -101,6 +102,11 @@ while True:
        
     except (TembooError, TembooHTTPError):
         print 'Oooops!'
+		d=d+1
+        if d==5:
+            p=subprocess.Popen(command.split(),stdout=subprocess.PIPE)
+            output= p.communicate()[0]
+            print output
        
     try:
         # Print the Choreo outputs
