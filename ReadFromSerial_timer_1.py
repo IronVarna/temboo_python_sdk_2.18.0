@@ -16,6 +16,7 @@ import time
 import subprocess
 import threading
 import sys
+import string
 
 
 
@@ -49,6 +50,9 @@ except serial.SerialException:
 
 #LOOP-Leggo messaggio di Arduino e lo invio
 while True:
+    #data e ora correnti
+    tempo=time.strftime("%H:%M:%S")
+    data=time.strftime("%d/%m/%Y")
     try:
         read_serial=ser.readline()
     except (serial.SerialException, OSError, NameError):
@@ -59,9 +63,8 @@ while True:
             output= p.communicate()[0]
             print output
         
-    #data e ora correnti
-    tempo=time.strftime("%H:%M:%S")
-    data=time.strftime("%d/%m/%Y")
+    
+
     try:
         print read_serial
     except NameError:
@@ -71,8 +74,10 @@ while True:
         #print output
         
     print data, tempo
-
+    oggi=string.split(data,"/")
+    StringaDati=string.split(read_serial,",")
     
+    Informazione="MTR"+","+ data+","+tempo+","StringaDati[3]+","+StringaDati[4]+","+StringaDati[5]+","+StringaDati[6]+","+StringaDati[7]+","+StringaDati[8]+","+StringaDati[9]+","+StringaDati[10]+","+StringaDati[11]+","+oggi[0]
     # Create a session with your Temboo account details
     t=threading.Timer(120.0, timer_Temboo)
     t.start()
@@ -86,7 +91,7 @@ while True:
     appendRowInputs = appendRowChoreo.new_input_set()
 
     # Set the Choreo inputs
-    appendRowInputs.set_RowData(read_serial)
+    appendRowInputs.set_RowData(Informazione)
     appendRowInputs.set_SpreadsheetTitle("ArduinoLog")
     appendRowInputs.set_RefreshToken("1/aLxhlVr07QMDnS9qYtcMWbAw7KngqO_TIZCbja2Bi88")
     appendRowInputs.set_ClientSecret("ccoAJeO8Yuf33S25AvWocb7b")
