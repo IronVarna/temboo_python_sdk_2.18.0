@@ -80,14 +80,17 @@ while True:
         StringaDati=string.split(read_serial,",")
     except NameError:
         print "Stringa dati vuota" 
-        StringaDati=string.split("0 0 0 0 0 0 0 0 0 0 0")
-    
-    Informazione="MTR"+","+ data+","+tempo+","+StringaDati[3]+","+StringaDati[4]+","+StringaDati[5]+","+StringaDati[6]+","+StringaDati[7]+","+StringaDati[8]+","+StringaDati[9]+","+StringaDati[10]+","+StringaDati[11]+","+oggi[0]
+        
+    try:
+        Informazione="MTR"+","+ data+","+tempo+","+StringaDati[3]+","+StringaDati[4]+","+StringaDati[5]+","+StringaDati[6]+","+StringaDati[7]+","+StringaDati[8]+","+StringaDati[9]+","+StringaDati[10]+","+StringaDati[11]+","+oggi[0]
+    except IndexError:
+        Informazione="MTR"+","+ data+","+tempo+","+"ERROR ARDUINO"
+        
     # Create a session with your Temboo account details
     t=threading.Timer(120.0, timer_Temboo)
     t.start()
     print "Inizio sessione, timer avviato..."
-    session = TembooSession("sperimentaleggp", "myFirstApp", "XXX")
+    session = TembooSession("sperimentaleggp", "myFirstApp", "1akJ2G8w0DhM6TDCyKPFGwXvFgRveiZ6")
 
     # Instantiate the Choreo
     appendRowChoreo = AppendRow(session)
@@ -99,8 +102,8 @@ while True:
     appendRowInputs.set_RowData(Informazione)
     appendRowInputs.set_SpreadsheetTitle("ArduinoLog")
     appendRowInputs.set_RefreshToken("1/aLxhlVr07QMDnS9qYtcMWbAw7KngqO_TIZCbja2Bi88")
-    appendRowInputs.set_ClientSecret("XXX")
-    appendRowInputs.set_ClientID("XXX.apps.googleusercontent.com")
+    appendRowInputs.set_ClientSecret("ccoAJeO8Yuf33S25AvWocb7b")
+    appendRowInputs.set_ClientID("374932964420-dmt8ularkt07p1e6jho1r8ahrsqv32d9.apps.googleusercontent.com")
 
     count=count+1
     print "Sessione numero: "      
