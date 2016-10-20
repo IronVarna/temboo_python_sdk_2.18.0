@@ -78,7 +78,7 @@ while True:
     
     try:    
         StringaDati=string.split(read_serial,",")
-    except: NameError:
+    except NameError:
         print "Stringa dati vuota" 
         StringaDati=string.split("0 0 0 0 0 0 0 0 0 0 0")
     
