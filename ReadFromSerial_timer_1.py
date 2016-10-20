@@ -83,7 +83,7 @@ while True:
         
     try:
         Informazione="MTR"+","+ data+","+tempo+","+StringaDati[3]+","+StringaDati[4]+","+StringaDati[5]+","+StringaDati[6]+","+StringaDati[7]+","+StringaDati[8]+","+StringaDati[9]+","+StringaDati[10]+","+StringaDati[11]+","+oggi[0]
-    except IndexError:
+    except (IndexError, NameError):
         Informazione="MTR"+","+ data+","+tempo+","+"ERROR ARDUINO"
         
     # Create a session with your Temboo account details
