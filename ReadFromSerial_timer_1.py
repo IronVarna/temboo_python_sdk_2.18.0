@@ -75,7 +75,12 @@ while True:
         
     print data, tempo
     oggi=string.split(data,"/")
-    StringaDati=string.split(read_serial,",")
+    
+    try:    
+        StringaDati=string.split(read_serial,",")
+    except: NameError:
+        print "Stringa dati vuota" 
+        StringaDati=string.split("0 0 0 0 0 0 0 0 0 0 0")
     
     Informazione="MTR"+","+ data+","+tempo+","+StringaDati[3]+","+StringaDati[4]+","+StringaDati[5]+","+StringaDati[6]+","+StringaDati[7]+","+StringaDati[8]+","+StringaDati[9]+","+StringaDati[10]+","+StringaDati[11]+","+oggi[0]
     # Create a session with your Temboo account details
